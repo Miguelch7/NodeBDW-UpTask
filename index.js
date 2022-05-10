@@ -1,6 +1,7 @@
 const express = require('express');
 const routes = require('./routes');
 const path = require('path');
+const bodyParser = require('body-parser');
 
 // Crear una app de express
 const app = express();
@@ -13,6 +14,9 @@ app.use(express.static('public'));
 
 // Añadir la carpeta de las vistas
 app.set('views', path.join(__dirname, './views'));
+
+// Habilitar bodyParser para leer datos de formularios
+app.use(bodyParser.urlencoded({extended: true}));
 
 // Rutas
 app.use('/', routes());
