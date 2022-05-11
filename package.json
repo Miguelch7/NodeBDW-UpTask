@@ -23,6 +23,7 @@
     "mysql2": "^1.6.4",
     "pug": "^2.0.3",
     "sequelize": "^4.42.0",
+    "shortid": "^2.2.14",
     "slug": "^0.9.3"
   },
   "devDependencies": {
