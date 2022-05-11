@@ -3,6 +3,8 @@ const routes = require('./routes');
 const path = require('path');
 const bodyParser = require('body-parser');
 require('dotenv').config();
+// Importar helpers
+const helpers = require('./helpers');
 
 // Crear la conexión a la BD
 const db = require('./config/db');
@@ -25,6 +27,12 @@ app.use(express.static('public'));
 
 // Añadir la carpeta de las vistas
 app.set('views', path.join(__dirname, './views'));
+
+// Pasar vardump a la app
+app.use((req, res, next) => {
+    res.locals.vardump = helpers.vardump;
+    next();
+});
 
 // Habilitar bodyParser para leer datos de formularios
 app.use(bodyParser.urlencoded({extended: true}));
