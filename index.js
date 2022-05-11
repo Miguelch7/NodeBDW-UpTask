@@ -2,6 +2,14 @@ const express = require('express');
 const routes = require('./routes');
 const path = require('path');
 const bodyParser = require('body-parser');
+require('dotenv').config();
+
+// Crear la conexión a la BD
+const db = require('./config/db');
+
+db.sync()
+    .then(() => console.log('Conectado a la BD'))
+    .catch(error => console.log(error));
 
 // Crear una app de express
 const app = express();
@@ -21,4 +29,4 @@ app.use(bodyParser.urlencoded({extended: true}));
 // Rutas
 app.use('/', routes());
 
-app.listen(3000);
+app.listen(process.env.SERVER_PORT);
