@@ -7,6 +7,9 @@ require('dotenv').config();
 // Crear la conexión a la BD
 const db = require('./config/db');
 
+// Importar el modelo
+require('./models/Proyectos');
+
 db.sync()
     .then(() => console.log('Conectado a la BD'))
     .catch(error => console.log(error));
