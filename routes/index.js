@@ -3,7 +3,7 @@ const router = express.Router();
 // Importar express-validator
 const { body } = require('express-validator/check');
 // Importar el controlador
-const { proyectosHome, formularioProyecto, nuevoProyecto } = require('../controllers/proyectosController');
+const { proyectosHome, formularioProyecto, nuevoProyecto, proyectoPorUrl } = require('../controllers/proyectosController');
 
 module.exports = function() {
     // Rutas
@@ -13,6 +13,9 @@ module.exports = function() {
         body('nombre').not().isEmpty().trim().escape(),
         nuevoProyecto
     );
+
+    // Listar proyecto
+    router.get('/proyectos/:url', proyectoPorUrl);
 
     return router;
 };
