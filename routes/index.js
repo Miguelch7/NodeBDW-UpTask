@@ -3,7 +3,7 @@ const router = express.Router();
 // Importar express-validator
 const { body } = require('express-validator/check');
 // Importar el controlador
-const { proyectosHome, formularioProyecto, nuevoProyecto, proyectoPorUrl, formularioEditar, actualizarProyecto } = require('../controllers/proyectosController');
+const { proyectosHome, formularioProyecto, nuevoProyecto, proyectoPorUrl, formularioEditar, actualizarProyecto, eliminarProyecto } = require('../controllers/proyectosController');
 
 module.exports = function() {
     // Rutas
@@ -20,6 +20,7 @@ module.exports = function() {
         body('nombre').not().isEmpty().trim().escape(),
         actualizarProyecto
     );
+    router.delete('/proyectos/:url', eliminarProyecto);
 
     return router;
 };
