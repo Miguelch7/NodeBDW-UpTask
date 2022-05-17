@@ -14,7 +14,8 @@ const {
 } = require('../controllers/proyectosController');
 
 const {
-    nuevaTarea
+    nuevaTarea,
+    cambiarEstadoTarea
 } = require('../controllers/tareasController');
 
 module.exports = function() {
@@ -36,7 +37,8 @@ module.exports = function() {
     router.delete('/proyectos/:url', eliminarProyecto); // Eliminar proyecto
 
     // Tareas
-    router.post('/proyectos/:url', nuevaTarea);
+    router.post('/proyectos/:url', nuevaTarea); // Crear tarea
+    router.patch('/tareas/:id', cambiarEstadoTarea); // Actualizar tarea
 
     return router;
 };
