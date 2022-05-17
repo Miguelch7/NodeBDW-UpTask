@@ -1,4 +1,5 @@
 const Proyectos = require('../models/Proyectos');
+const Tareas = require('../models/Tareas');
 
 exports.proyectosHome = async (req, res) => {
 
@@ -60,6 +61,8 @@ exports.proyectoPorUrl = async (req, res, next) => {
 
     const [ proyectos, proyecto ] = await Promise.all([ proyectosPromise, proyectoPromise ]);
 
+    const tareas = await Tareas.findAll({ where: { proyectoId: proyecto.id } });
+
     if (!proyecto) {
         return next();
     };
@@ -67,7 +70,8 @@ exports.proyectoPorUrl = async (req, res, next) => {
     res.render('tareas', {
         nombrePagina: 'Tareas del Proyecto',
         proyectos,
-        proyecto
+        proyecto,
+        tareas
     }); 
 };
 
