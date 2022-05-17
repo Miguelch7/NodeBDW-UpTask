@@ -13,6 +13,10 @@ const {
     eliminarProyecto 
 } = require('../controllers/proyectosController');
 
+const {
+    nuevaTarea
+} = require('../controllers/tareasController');
+
 module.exports = function() {
     // Home
     router.get('/', proyectosHome);
@@ -30,6 +34,9 @@ module.exports = function() {
         actualizarProyecto
     ); // Actualizar proyecto
     router.delete('/proyectos/:url', eliminarProyecto); // Eliminar proyecto
+
+    // Tareas
+    router.post('/proyectos/:url', nuevaTarea);
 
     return router;
 };
