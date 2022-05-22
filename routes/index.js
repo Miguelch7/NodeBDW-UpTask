@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 // Importar express-validator
 const { body } = require('express-validator/check');
-// Importar el controlador
+
+// ProyectoController
 const { 
     proyectosHome, 
     formularioProyecto, 
@@ -13,11 +14,17 @@ const {
     eliminarProyecto 
 } = require('../controllers/proyectosController');
 
+// Tarea Controller
 const {
     nuevaTarea,
     cambiarEstadoTarea,
     eliminarTarea
 } = require('../controllers/tareasController');
+
+// Usuario Controller
+const {
+    formCrearCuenta
+} = require('../controllers/usuariosController');
 
 module.exports = function() {
     // Home
@@ -41,6 +48,9 @@ module.exports = function() {
     router.post('/proyectos/:url', nuevaTarea); // Crear tarea
     router.patch('/tareas/:id', cambiarEstadoTarea); // Actualizar tarea
     router.delete('/tareas/:id', eliminarTarea); // Actualizar tarea
+
+    // Usuarios
+    router.get('/crear-cuenta', formCrearCuenta); // Vista - Crear cuenta
 
     return router;
 };
