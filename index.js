@@ -6,6 +6,7 @@ const expressValidator = require('express-validator');
 const flash = require('connect-flash');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const passport = require('./config/passport');
 require('dotenv').config();
 
 // Importar helpers
@@ -53,6 +54,10 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }));
+
+// Agregar passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Pasar vardump a la app
 app.use((req, res, next) => {
