@@ -5,3 +5,13 @@ exports.formCrearCuenta = (req, res) => {
         nombrePagina: 'Crear Cuenta en UpTask'
     });
 };
+
+exports.crearCuenta = async (req, res) => {
+
+    // Leer los datos
+    const { email, password } = req.body;
+
+    // Crear el usuario
+    const usuario = await Usuarios.create({ email, password });
+
+};

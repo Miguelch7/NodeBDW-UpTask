@@ -23,7 +23,8 @@ const {
 
 // Usuario Controller
 const {
-    formCrearCuenta
+    formCrearCuenta,
+    crearCuenta
 } = require('../controllers/usuariosController');
 
 module.exports = function() {
@@ -51,6 +52,7 @@ module.exports = function() {
 
     // Usuarios
     router.get('/crear-cuenta', formCrearCuenta); // Vista - Crear cuenta
+    router.post('/crear-cuenta', crearCuenta); // Crear cuenta
 
     return router;
 };
