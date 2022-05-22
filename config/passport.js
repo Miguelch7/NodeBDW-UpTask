@@ -19,7 +19,7 @@ passport.use(
 
                 if (!usuario.verificarPassword(password)) {
                     // Password incorrecto
-                    return done(null, null, {
+                    return done(null, false, {
                         message: 'Password Incorrecto'
                     });
                 };
@@ -27,7 +27,7 @@ passport.use(
                 return done(null, usuario);
             } catch (error) {
                 // Ese usuario no existe
-                return done(null, null, {
+                return done(null, false, {
                     message: 'Esa cuenta no existe'
                 });
             };
