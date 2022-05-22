@@ -24,7 +24,8 @@ const {
 // Usuario Controller
 const {
     formCrearCuenta,
-    crearCuenta
+    crearCuenta,
+    formIniciarSesion
 } = require('../controllers/usuariosController');
 
 module.exports = function() {
@@ -50,9 +51,12 @@ module.exports = function() {
     router.patch('/tareas/:id', cambiarEstadoTarea); // Actualizar tarea
     router.delete('/tareas/:id', eliminarTarea); // Actualizar tarea
 
-    // Usuarios
-    router.get('/crear-cuenta', formCrearCuenta); // Vista - Crear cuenta
-    router.post('/crear-cuenta', crearCuenta); // Crear cuenta
+    // Crear cuenta
+    router.get('/crear-cuenta', formCrearCuenta);
+    router.post('/crear-cuenta', crearCuenta);
+
+    // Iniciar sesión
+    router.get('/iniciar-sesion', formIniciarSesion);
 
     return router;
 };
