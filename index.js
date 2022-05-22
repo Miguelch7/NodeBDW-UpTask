@@ -12,6 +12,7 @@ const db = require('./config/db');
 // Importar los modelos
 require('./models/Proyectos');
 require('./models/Tareas');
+require('./models/Usuarios');
 
 db.sync()
     .then(() => console.log('Conectado a la BD'))
