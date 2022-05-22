@@ -4,6 +4,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 const flash = require('connect-flash');
+const cookieParser = require('cookie-parser');
 require('dotenv').config();
 
 // Importar helpers
@@ -24,23 +25,26 @@ db.sync()
 // Crear una app de express
 const app = express();
 
+// Añadir carpeta pública
+app.use(express.static('public'));
+
+// Habilitar Pug
+app.set('view engine', 'pug');
+
 // Habilitar bodyParser para leer datos de formularios
 app.use(bodyParser.urlencoded({extended: true}));
 
 // Agregamos express validator a toda la aplicación
 app.use( expressValidator() );
 
-// Habilitar Pug
-app.set('view engine', 'pug');
-
-// Añadir carpeta pública
-app.use(express.static('public'));
-
 // Añadir la carpeta de las vistas
 app.set('views', path.join(__dirname, './views'));
 
 // Agregar flash messages
 app.use( flash() );
+
+// Agregar cookie parser
+app.use(cookieParser());
 
 // Pasar vardump a la app
 app.use((req, res, next) => {
