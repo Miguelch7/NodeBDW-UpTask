@@ -18,6 +18,12 @@ const Usuarios = db.define('usuarios', {
         type: Sequelize.STRING(60),
         allowNull: false
     }
+}, {
+    hooks: {
+        beforeCreate(usuario) {
+            usuario.password = bcryptjs.hashSync( usuario.password, bcryptjs.genSaltSync(10) );
+        }
+    }
 });
 Usuarios.hasMany(Proyectos);
 
