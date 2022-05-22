@@ -31,7 +31,8 @@ const {
 // Auth Controller
 const {
     autenticarUsuario,
-    usuarioAutenticado
+    usuarioAutenticado,
+    cerrarSesion
 } = require('../controllers/authController');
 
 module.exports = function() {
@@ -100,6 +101,9 @@ module.exports = function() {
     // Iniciar sesión
     router.get('/iniciar-sesion', formIniciarSesion);
     router.post('/iniciar-sesion', autenticarUsuario);
+
+    // Cerrar sesión
+    router.get('/cerrar-sesion', cerrarSesion);
 
     return router;
 };
