@@ -28,6 +28,11 @@ const {
     formIniciarSesion
 } = require('../controllers/usuariosController');
 
+// Auth Controller
+const {
+    autenticarUsuario 
+} = require('../controllers/authController');
+
 module.exports = function() {
     // Home
     router.get('/', proyectosHome);
@@ -57,6 +62,7 @@ module.exports = function() {
 
     // Iniciar sesión
     router.get('/iniciar-sesion', formIniciarSesion);
+    router.post('/iniciar-sesion', autenticarUsuario);
 
     return router;
 };
