@@ -30,31 +30,68 @@ const {
 
 // Auth Controller
 const {
-    autenticarUsuario 
+    autenticarUsuario,
+    usuarioAutenticado
 } = require('../controllers/authController');
 
 module.exports = function() {
     // Home
-    router.get('/', proyectosHome);
+    router.get('/', 
+        usuarioAutenticado, 
+        proyectosHome
+    );
 
-    // Proyectos
-    router.get('/nuevo-proyecto', formularioProyecto); // Vista - Crear Proyecto
+    // Crear proyecto
+    router.get('/nuevo-proyecto', 
+        usuarioAutenticado,
+        formularioProyecto
+    );
     router.post('/nuevo-proyecto',
+        usuarioAutenticado,
         body('nombre').not().isEmpty().trim().escape(),
         nuevoProyecto
-    ); // Crear proyecto
-    router.get('/proyectos/:url', proyectoPorUrl); // Listar proyecto
-    router.get('/proyecto/editar/:id', formularioEditar); // Vista - Actualizar proyecto
+    );
+    
+    // Listar proyecto
+    router.get('/proyectos/:url', 
+        usuarioAutenticado,
+        proyectoPorUrl
+    );
+
+    // Actualizar proyecto
+    router.get('/proyecto/editar/:id', 
+        usuarioAutenticado,
+        formularioEditar
+    );
     router.post('/nuevo-proyecto/:id',
+        usuarioAutenticado,
         body('nombre').not().isEmpty().trim().escape(),
         actualizarProyecto
-    ); // Actualizar proyecto
-    router.delete('/proyectos/:url', eliminarProyecto); // Eliminar proyecto
+    );
 
-    // Tareas
-    router.post('/proyectos/:url', nuevaTarea); // Crear tarea
-    router.patch('/tareas/:id', cambiarEstadoTarea); // Actualizar tarea
-    router.delete('/tareas/:id', eliminarTarea); // Actualizar tarea
+    // Eliminar proyecto
+    router.delete('/proyectos/:url', 
+        usuarioAutenticado,
+        eliminarProyecto
+    );
+
+    // Crear tarea
+    router.post('/proyectos/:url', 
+        usuarioAutenticado,
+        nuevaTarea
+    );
+
+    // Actualizar tarea
+    router.patch('/tareas/:id', 
+        usuarioAutenticado,
+        cambiarEstadoTarea
+    );
+
+    // Eliminar tarea
+    router.delete('/tareas/:id', 
+        usuarioAutenticado,
+        eliminarTarea
+    );
 
     // Crear cuenta
     router.get('/crear-cuenta', formCrearCuenta);
