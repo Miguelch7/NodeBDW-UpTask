@@ -3,7 +3,9 @@ const routes = require('./routes');
 const path = require('path');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
+const flash = require('connect-flash');
 require('dotenv').config();
+
 // Importar helpers
 const helpers = require('./helpers');
 
@@ -36,6 +38,9 @@ app.use(express.static('public'));
 
 // Añadir la carpeta de las vistas
 app.set('views', path.join(__dirname, './views'));
+
+// Agregar flash messages
+app.use( flash() );
 
 // Pasar vardump a la app
 app.use((req, res, next) => {
