@@ -2,6 +2,7 @@ const express = require('express');
 const routes = require('./routes');
 const path = require('path');
 const bodyParser = require('body-parser');
+const expressValidator = require('express-validator');
 require('dotenv').config();
 // Importar helpers
 const helpers = require('./helpers');
@@ -21,6 +22,12 @@ db.sync()
 // Crear una app de express
 const app = express();
 
+// Habilitar bodyParser para leer datos de formularios
+app.use(bodyParser.urlencoded({extended: true}));
+
+// Agregamos express validator a toda la aplicación
+app.use( expressValidator() );
+
 // Habilitar Pug
 app.set('view engine', 'pug');
 
@@ -35,9 +42,6 @@ app.use((req, res, next) => {
     res.locals.vardump = helpers.vardump;
     next();
 });
-
-// Habilitar bodyParser para leer datos de formularios
-app.use(bodyParser.urlencoded({extended: true}));
 
 // Rutas
 app.use('/', routes());
