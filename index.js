@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 const flash = require('connect-flash');
 const cookieParser = require('cookie-parser');
+const session = require('express-session');
 require('dotenv').config();
 
 // Importar helpers
@@ -45,6 +46,13 @@ app.use( flash() );
 
 // Agregar cookie parser
 app.use(cookieParser());
+
+// Agregar session
+app.use(session({
+    secret: process.env.SESSION_KEY,
+    resave: false,
+    saveUninitialized: false
+}));
 
 // Pasar vardump a la app
 app.use((req, res, next) => {
