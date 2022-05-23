@@ -1,5 +1,6 @@
 const Usuarios = require('../models/Usuarios');
 const { Op } = require('sequelize');
+const bcryptjs = require('bcryptjs');
 
 exports.formCrearCuenta = (req, res) => {
     res.render('crearCuenta', {
@@ -63,7 +64,7 @@ exports.actualizarPassword = async (req, res) => {
         res.redirect('/reestablecer-password');
     };
 
-    usuario.password = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+    usuario.password = bcryptjs.hashSync(password, bcryptjs.genSaltSync(10));
     usuario.token = null;
     usuario.expiracion = null;
 
