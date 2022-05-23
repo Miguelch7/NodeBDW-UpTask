@@ -1,6 +1,7 @@
 const Usuarios = require('../models/Usuarios');
 const { Op } = require('sequelize');
 const bcryptjs = require('bcryptjs');
+const enviarEmail = require('../handlers/email');
 
 exports.formCrearCuenta = (req, res) => {
     res.render('crearCuenta', {
@@ -26,6 +27,16 @@ exports.crearCuenta = async (req, res) => {
         // Crear el usuario
         await Usuarios.create({ email, password });
 
+        const confirmarUrl = `http://${ req.headers.host }/confirmar-cuenta/${ email }`; 
+
+        await enviarEmail.enviar({
+            subject: 'Confirma tu cuenta en UpTask',
+            archivo: 'confirmar-cuenta',
+            usuario: { email },
+            url: confirmarUrl
+        });
+
+        req.flash('correcto', 'Enviamos un correo, confirma tu cuenta');
         res.redirect('/iniciar-sesion');
     } catch (error) {
         req.flash('error', error.errors.map( error => error.message ));
