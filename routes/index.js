@@ -25,6 +25,7 @@ const {
 const {
     formCrearCuenta,
     crearCuenta,
+    confirmarCuenta,
     formIniciarSesion,
     formRestablecerPassword,
     actualizarPassword
@@ -101,6 +102,7 @@ module.exports = function() {
     // Crear cuenta
     router.get('/crear-cuenta', formCrearCuenta);
     router.post('/crear-cuenta', crearCuenta);
+    router.get('/confirmar-cuenta/:email', confirmarCuenta);
 
     // Iniciar sesión
     router.get('/iniciar-sesion', formIniciarSesion);
