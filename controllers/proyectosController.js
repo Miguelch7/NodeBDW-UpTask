@@ -3,7 +3,8 @@ const Tareas = require('../models/Tareas');
 
 exports.proyectosHome = async (req, res) => {
 
-    const proyectos = await Proyectos.findAll();
+    const usuarioId = res.locals.usuario.id;
+    const proyectos = await Proyectos.findAll({ where: { usuarioId } });
 
     res.render('index', {
         nombrePagina: 'Proyectos',
@@ -45,6 +46,7 @@ exports.nuevoProyecto = async (req, res) => {
         // No hay errores
         // Insertar en la BD
         const usuarioId = res.locals.usuario.id;
+
         await Proyectos.create({ nombre, usuarioId });
 
         res.redirect('/');
