@@ -1,4 +1,5 @@
 const Usuarios = require('../models/Usuarios');
+const { Op } = require('sequelize');
 
 exports.formCrearCuenta = (req, res) => {
     res.render('crearCuenta', {
@@ -41,4 +42,33 @@ exports.formRestablecerPassword = (req, res) => {
     res.render('reestablecerPassword', {
         nombrePagina: 'Reestablecer tu contraseña'
     });
+};
+
+exports.actualizarPassword = async (req, res) => {
+
+    const { token } = req.params;
+    const { password } = req.body;
+
+    const usuario = await Usuarios.findOne({ 
+        where: { 
+            token, 
+            expiracion: {
+                [Op.gte]: Date.now()
+            } 
+        }
+    });
+
+    if (!usuario) {
+        req.flash('error', 'No es válido');
+        res.redirect('/reestablecer-password');
+    };
+
+    usuario.password = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+    usuario.token = null;
+    usuario.expiracion = null;
+
+    await usuario.save();
+
+    req.flash('correcto', 'Tu password se ha modificado correctamente');
+    res.redirect('/iniciar-sesion');
 };
