@@ -43,7 +43,7 @@ exports.enviarToken = async (req, res) => {
     const resetUrl = `http://${ req.headers.host }/reestablecer-password/${ usuario.token }`;
 };
 
-exports.reestablecerPassword = async (req, res) => {
+exports.validarToken = async (req, res) => {
     
     const { token } = req.params;
 

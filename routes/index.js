@@ -35,7 +35,7 @@ const {
     usuarioAutenticado,
     cerrarSesion,
     enviarToken,
-    reestablecerPassword
+    validarToken
 } = require('../controllers/authController');
 
 module.exports = function() {
@@ -111,7 +111,7 @@ module.exports = function() {
     // Reestablecer password
     router.get('/reestablecer-password', formRestablecerPassword);
     router.post('/reestablecer-password', enviarToken);
-    router.get('/reestablecer-password/:token', reestablecerPassword);
+    router.get('/reestablecer-password/:token', validarToken);
 
     return router;
 };
