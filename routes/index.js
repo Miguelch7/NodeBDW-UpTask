@@ -25,7 +25,8 @@ const {
 const {
     formCrearCuenta,
     crearCuenta,
-    formIniciarSesion
+    formIniciarSesion,
+    formRestablecerPassword
 } = require('../controllers/usuariosController');
 
 // Auth Controller
@@ -104,6 +105,9 @@ module.exports = function() {
 
     // Cerrar sesión
     router.get('/cerrar-sesion', cerrarSesion);
+
+    // Reestablecer password
+    router.get('/reestablecer-password', formRestablecerPassword);
 
     return router;
 };
