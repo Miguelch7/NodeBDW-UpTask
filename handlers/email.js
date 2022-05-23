@@ -19,9 +19,9 @@ const generarHTML = (archivo, opciones = {}) => {
     return juice(html);
 };
 
-exports.enviar = async ({ subject, archivo, usuario, resetUrl }) => {
+exports.enviar = async ({ subject, archivo, usuario, url }) => {
 
-    const html = generarHTML(archivo, { subject, archivo, usuario, resetUrl });
+    const html = generarHTML(archivo, { subject, archivo, usuario, url });
     const text = fromString(html);
 
     const enviarEmail = util.promisify(transport.sendMail, transport);
